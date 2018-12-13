@@ -1,3 +1,5 @@
+students = []
+
 def create_student():
     name = input('Enter your student\'s name: ')
     marks = input("Enter student's grades as a comma separated list of values: ")
@@ -8,7 +10,7 @@ def create_student():
         "name":name,
         "grades": [int(grade) for grade in marks_array]
     }
-    print(student_details["grades"])
+    students.append(student_details)
     return student_details
 
 def add_mark(student, mark):
@@ -17,15 +19,22 @@ def add_mark(student, mark):
 s = create_student()
 
 
+
 def calculate_average_mark(student):
     number_of_marks = len(student["grades"])
     sum_of_grades = sum(student["grades"])
-    try:
-        print(number_of_marks, sum_of_grades)
-        return sum_of_grades / number_of_marks
-    except ZeroDivisionError:
-        print('No grades yet')
+    print(int(sum_of_grades / number_of_marks))
+    return int(sum_of_grades / number_of_marks)
+
+def show_details(student):
+    print("{} has an average of".format(student["name"], calculate_average_mark(student)))
+
+def show_all_details(students):
+    for student in students:
+        show_details(student)
+        calculate_average_mark(student)
 
 
 
-print(calculate_average_mark(s))
+print(students)
+show_all_details(students)
