@@ -16,25 +16,38 @@ def create_student():
 def add_mark(student, mark):
     student["grades"].append(mark)
 
-s = create_student()
-
-
 
 def calculate_average_mark(student):
     number_of_marks = len(student["grades"])
     sum_of_grades = sum(student["grades"])
-    print(int(sum_of_grades / number_of_marks))
-    return int(sum_of_grades / number_of_marks)
+    print(sum_of_grades/number_of_marks)
+    return int(sum_of_grades/number_of_marks)
 
 def show_details(student):
-    print("{} has an average of".format(student["name"], calculate_average_mark(student)))
+    print("{} has an average of {}".format(student["name"], calculate_average_mark(student)))
 
 def show_all_details(students):
-    for student in students:
+    for i, student in enumerate(students):
+        print("id: ", i, student)
         show_details(student)
-        calculate_average_mark(student)
 
 
+def menu():
 
-print(students)
-show_all_details(students)
+    selection = input("""Press 'a' to add a student, 'l' to list students, 'd' to add a grade or 'q' to quit : \nType a letter: """)
+    while selection != 'q':
+        if selection == 'a':
+            create_student()
+        elif selection == 'l':
+            show_all_details(students)
+        elif selection == 'd':
+            select = int(input('Which student ID do you want to add a grade to?'))
+            grade = int(input('What grade?'))
+            add_mark(students[select], grade)
+        elif selection == 'q':
+            break
+        selection = input("""Press 'a' to add a student, 'l' to list students, 'd' to add a grade or 'q' to quit """)
+
+
+menu()
+
